@@ -8,40 +8,50 @@ import os
 def generate_gaussian(N, mu, sigma):
     array = [None] * N
     for i in range(0, N):
-        array[i] = round(gauss(mu, sigma), 2)
+        array[i] = gauss(mu, sigma)
     return array
 
 def DFA():
-    N = 200
-    L = 10
+    L = 200
     X = []
-    # 1
-    array = generate_gaussian(N, 2, 3)
+    # 0
+    # array = generate_gaussian(N, 0, 1)
+    array = []
+    with open('data_to_DFA.txt') as data:
+        for line in data:
+            i, value = line.split()
+            array.append(float(value))
+    # N = len(array)
+
     plik = open('data.dat', 'w')
-    write_to_file(plik, array)
    
-    # 2
+    # 1
     avg = np.average(array)
-    cumul_sum = 0
-    for i in range (0, len(array)):
-        cumul_sum += array[i] - avg
+
+    # 2
+    randomWalk = []
+    for j in range (0, len(array)):
+        cumul_sum = 0.0
+        for i in range (0, j):
+            cumul_sum += array[i] - avg
+        randomWalk.append(cumul_sum)
+    write_to_file(plik, randomWalk)
 
     # 3
     linear_plik = open('linear.dat', 'w')
-    temp_array = array.copy()
+    temp_array = randomWalk.copy()
     for i in range(0,L):
         X.append(i)
     i=0
     F = []
-    while i <= len(array)-L:
+    while i <= len(randomWalk)-L:
         line = np.polyfit(X, temp_array[0:L], 1)
         del temp_array[0:L]
         write_line_file (linear_plik, line, i, i+L-1, L)
-        # print(line)
+        
         # 4
-        F.append(calculate_F(line, L, i, array))
+        F.append(calculate_F(line, L, i, randomWalk))
         i=i+L
-        # print(k, len(array)-L)
 
     # 5
     F_avg = np.average(F)

@@ -9,7 +9,7 @@ set style line 2 \
     linecolor rgb '#dd181f' \
     linetype 1 linewidth 2 \
     pointtype 5 pointsize 0
-set title "Dane gauss"
+set title "Random Walk"
 set xlabel "czas"
 set ylabel "value"
 set grid

@@ -1,83 +1,97 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-2 -*-
-from random import *
+from Lib.random import *
 import numpy as np
 import subprocess
-import os
+import Lib.os
+import matplotlib.pyplot as plt
 
-def generate_gaussian(N, mu, sigma):
-    array = [None] * N
-    for i in range(0, N):
-        array[i] = gauss(mu, sigma)
-    return array
+
+# def generate_gaussian(N, mu, sigma):
+#     array = [None] * N
+#     for i in range(0, N):
+#         array[i] = gauss(mu, sigma)
+#     return array
+
 
 def DFA():
-    L = 200
-    X = []
     # 0
     # array = generate_gaussian(N, 0, 1)
     array = []
+    indexes = []
     with open('data_to_DFA.txt') as data:
         for line in data:
             i, value = line.split()
+            indexes.append(int(i))
             array.append(float(value))
-    # N = len(array)
+    N = len(array)
 
-    plik = open('data.dat', 'w')
-   
-    # 1
+    # ??????????????????????????????????? jak dobraæ te dlugosci??
+    L = []
+    for w in range(1, 15):
+        L.append(w*int(((N/2)/15)))
+    # L = [5, 11, 33, 66, 120, 165, 331]
+
+    # 1 OK
     avg = np.average(array)
 
-    # 2
+    # 2 OK
     randomWalk = []
-    for j in range (0, len(array)):
-        cumul_sum = 0.0
-        for i in range (0, j):
-            cumul_sum += array[i] - avg
-        randomWalk.append(cumul_sum)
-    write_to_file(plik, randomWalk)
+    for j in range(0, N):
+        cumulative_sum = 0.0
+        for i in range(0, j):
+            cumulative_sum += array[i] - avg
+        randomWalk.append(cumulative_sum)
 
-    # 3
-    linear_plik = open('linear.dat', 'w')
-    temp_array = randomWalk.copy()
-    for i in range(0,L):
-        X.append(i)
-    i=0
-    F = []
-    while i <= len(randomWalk)-L:
-        line = np.polyfit(X, temp_array[0:L], 1)
-        del temp_array[0:L]
-        write_line_file (linear_plik, line, i, i+L-1, L)
-        
-        # 4
-        F.append(calculate_F(line, L, i, randomWalk))
-        i=i+L
+    # petla do wybierania d³ugo¶ci segmentów
+    F_avg = []
+    for segment_size in L:
+        # plt.plot(indexes, randomWalk)
+        # 3
+        temp_array = randomWalk.copy()
+        X = []
+        for i in range(0, segment_size):
+            X.append(i)
 
-    # 5
-    F_avg = np.average(F)
-    
-    plik.close()
-    linear_plik.close()
-    os.system("gnuplot create.gnu")
-    
-    return cumul_sum
+        i = 0
+        k = indexes[0]
+        F = []
+        while i <= N - segment_size:
+            # znalezienie prostej w segmencie: line[0]=a; line[1]=b;
+            line = np.polyfit(X, temp_array[0:segment_size], 1)
+            del temp_array[0:segment_size]
+            # plt.plot([i+indexes[0], i+segment_size-1+indexes[0]],
+            #          [line[0] * 0 + line[1], line[0] * segment_size + line[1]], 'r')
 
-def calculate_F(line, L, i, array):
+            # 4 wyliczenie F
+            F.append(calculateF(line, segment_size, i, k, randomWalk))
+            k = k + segment_size
+            i = i + segment_size
+        # plt.show()
+
+        print(F)
+        # 5 obliczenie sredniej fluktuacji dla danej dlugosci segmentu
+        F_avg.append(np.average(F))
+        print(segment_size, np.average(F))
+
+    print('lista sredniach F', F_avg)
+
+    #6 double logaritmic plot
+    plt.scatter(np.log(L), np.log(F_avg), s=10)
+    plt.show()
+
+    result = np.polyfit(np.log(L), np.log(F_avg), 1)
+    print('alfa = ', result[0])
+
+
+def calculateF(line, size, i, k, array):
     segment_sum = 0
-    for n in range(i, i+L-1):
-        segment_sum += (array[n] - line[0]*n - line[1])* (array[n] - line[0]*n - line[1])
+    for n in range(i, i + size):
+        segment_sum += (array[n] - (line[0] * k) - line[1]) * (array[n] - (line[0] * k) - line[1])
+        k = k + 1
 
-    F = np.sqrt((1/L)*segment_sum)
+    F = np.sqrt((1 / size) * segment_sum)
     return F
 
-def write_to_file(plik, L):
-    for i in range(0, len(L)):
-        plik.write(str(i) + "\t" + str(L[i]) + "\n")
 
-def write_line_file(plik, line, one, two, L):
-    plik.write('\n')
-    plik.write(str(one) + "\t" + str(line[0]*0 + line[1]) + "\n")
-    plik.write(str(two) + "\t" + str(line[0]*L + line[1]) + "\n")
-    plik.write('\n')
-
-print (DFA())
+DFA()

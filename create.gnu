@@ -1,6 +1,6 @@
 set term png
-set output 'data.png'
-stats "data.dat" u 1:2 nooutput
+set output 'nile.png'
+stats "randomWalk.dat" u 1:2 nooutput
 set style line 1 \
     linecolor rgb '#0060ad' \
     linetype 1 linewidth 2 \
@@ -14,6 +14,6 @@ set xlabel "czas"
 set ylabel "value"
 set grid
 unset key
-plot "data.dat" u 1:2 with linespoints linestyle 2, \
+plot "randomWalk.dat" u 1:2 with linespoints linestyle 2, \
     "linear.dat" u 1:2 with linespoints linestyle 1
 quit

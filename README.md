@@ -10,7 +10,7 @@
 ## R/S
 
 * wyniki dla nile.txt
-![NILE](RS-nile.png)
+![NILE](RS-Nile.png)
 
 * wynik dla danych z data_to_DFA.txt
 ![DFA](RS.png)

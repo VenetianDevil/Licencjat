@@ -16,22 +16,25 @@ import matplotlib.pyplot as plt
 
 def DFA():
     # 0
-    # array = generate_gaussian(N, 0, 1)
     array = []
     indexes = []
-    with open('data_to_DFA.txt') as data:
+    with open('nile.txt') as data:
         for line in data:
             i, value = line.split()
             indexes.append(int(i))
             array.append(float(value))
+    # array = [1.5, 1, 2, 3.5, 4, 2, 3, 1]
+    # indexes = [1, 2, 3, 4, 5, 6, 7, 8]
     N = len(array)
 
-    # ??????????????????????????????????? jak dobraæ te dlugosci??
     L = []
-    for w in range(1, 15):
-        L.append(w*int(((N/2)/15)))
-    # L = [5, 11, 33, 66, 120, 165, 331]
-
+    w = N
+    while w / 2 > 4:
+        if w % 2 == 0:
+            L.append(int(w / 2))
+            w = w / 2
+        else:
+            w -= 1
     # 1 OK
     avg = np.average(array)
 
@@ -49,19 +52,21 @@ def DFA():
         # plt.plot(indexes, randomWalk)
         # 3
         temp_array = randomWalk.copy()
-        X = []
-        for i in range(0, segment_size):
-            X.append(i)
+        X = indexes.copy()
+        # for i in range(0, segment_size):
+        #     X.append(i)
 
         i = 0
         k = indexes[0]
         F = []
         while i <= N - segment_size:
             # znalezienie prostej w segmencie: line[0]=a; line[1]=b;
-            line = np.polyfit(X, temp_array[0:segment_size], 1)
+            line = np.polyfit(X[0:segment_size], temp_array[0:segment_size], 1)
+
             del temp_array[0:segment_size]
-            # plt.plot([i+indexes[0], i+segment_size-1+indexes[0]],
-            #          [line[0] * 0 + line[1], line[0] * segment_size + line[1]], 'r')
+            # plt.plot([X[0], X[segment_size-1]],
+            #          [line[0] * X[0] + line[1], line[0] * X[segment_size - 1] + line[1]], 'r')
+            del X[0:segment_size]
 
             # 4 wyliczenie F
             F.append(calculateF(line, segment_size, i, k, randomWalk))
@@ -69,19 +74,27 @@ def DFA():
             i = i + segment_size
         # plt.show()
 
-        print(F)
         # 5 obliczenie sredniej fluktuacji dla danej dlugosci segmentu
         F_avg.append(np.average(F))
         print(segment_size, np.average(F))
 
-    print('lista sredniach F', F_avg)
-
     #6 double logaritmic plot
-    plt.scatter(np.log(L), np.log(F_avg), s=10)
-    plt.show()
+    plt.scatter(np.log(L), np.log(F_avg), s=20)
+    # plt.title('DFA Nile')
+    plt.title('DFA assigment 2')
+    plt.ylabel('log(F(L))')
+    plt.xlabel('log(L)')
 
     result = np.polyfit(np.log(L), np.log(F_avg), 1)
     print('alfa = ', result[0])
+    print(result)
+
+    # plt.text(5, 7.25, '\u03B1 = {}'.format(round(result[0], 2)))
+    plt.text(6, 3.5, '\u03B1 = {}'.format(round(result[0], 2)))
+    x1 = np.log(L[0])
+    x2 = np.log(L[-1])
+    plt.plot([np.log(L[0]), np.log(L[-1])], [result[0]*x1+result[1], result[0]*x2+result[1]], 'red')
+    plt.show()
 
 
 def calculateF(line, size, i, k, array):

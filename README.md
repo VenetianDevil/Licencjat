@@ -14,4 +14,3 @@
     ![NILE](RS-nile-7.png)
     * 5 punktów:
     ![NILE](RS-nile-5.png)
-

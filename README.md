@@ -2,20 +2,20 @@
 
 ## DFA
 * wynik dla nile.txt:
-
-    ![NILE](DFA_nile.png)
+    
+    ![NILE](wyniki/DFA_nile.png)
 
 * wynik dla danych z data_to_DFA.txt:
 
-    ![DFA](DFA.png)
+    ![DFA](wyniki/DFA.png)
 
 ## R/S
 
 * wyniki dla nile.txt
     * 7 punktów:
     
-    ![NILE](RS-nile-7.png)
+    ![NILE](wyniki/RS-nile-7.png)
     
     * 5 punktów:
     
-    ![NILE](RS-nile-5.png)
+    ![NILE](wyniki/RS-nile-5.png)

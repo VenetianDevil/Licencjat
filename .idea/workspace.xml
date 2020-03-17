@@ -19,17 +19,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/RS-nile-7.png" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/RandomWalk-for-Nile.png" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.RS">
+  <component name="RunManager" selected="Python.DFA">
     <configuration name="DFA" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Licencjat" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -88,8 +85,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.RS" />
         <item itemvalue="Python.DFA" />
+        <item itemvalue="Python.RS" />
       </list>
     </recent_temporary>
   </component>
@@ -104,7 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1583333934196</updated>
       <workItem from="1583333939031" duration="21113000" />
-      <workItem from="1583942862994" duration="6472000" />
+      <workItem from="1583942862994" duration="8943000" />
     </task>
     <servers />
   </component>
@@ -120,10 +117,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="94" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1583359283444" />
-    <state x="1060" y="260" key="FileChooserDialogImpl" timestamp="1583948918359">
+    <state x="1060" y="260" key="FileChooserDialogImpl" timestamp="1583950383240">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1060" y="260" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1583948918359" />
+    <state x="1060" y="260" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1583950383240" />
     <state width="2517" height="348" key="GridCell.Tab.0.bottom" timestamp="1583942890291">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>

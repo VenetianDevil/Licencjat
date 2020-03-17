@@ -2,20 +2,10 @@
 # -*- coding: iso-8859-2 -*-
 from Lib.random import *
 import numpy as np
-import subprocess
-import Lib.os
 import matplotlib.pyplot as plt
 
 
-# def generate_gaussian(N, mu, sigma):
-#     array = [None] * N
-#     for i in range(0, N):
-#         array[i] = gauss(mu, sigma)
-#     return array
-
-
-def DFA():
-    # 0
+def prepareData():
     array = []
     indexes = []
     with open('nile.txt') as data:
@@ -25,16 +15,24 @@ def DFA():
             array.append(float(value))
     # array = [1.5, 1, 2, 3.5, 4, 2, 3, 1]
     # indexes = [1, 2, 3, 4, 5, 6, 7, 8]
-    N = len(array)
 
     L = []
-    w = N
+    w = len(array)
     while w / 2 > 4:
         if w % 2 == 0:
             L.append(int(w / 2))
             w = w / 2
         else:
             w -= 1
+
+    return indexes, array, L
+
+
+def DFA():
+    # 0
+    indexes, array, L = prepareData()
+    N = len(array)
+
     # 1 OK
     avg = np.average(array)
 
@@ -49,13 +47,13 @@ def DFA():
     # petla do wybierania długości segmentów
     F_avg = []
     for segment_size in L:
+        # print(segment_size)
         # plt.plot(indexes, randomWalk)
+        # plt.title('Nile random walk')
+
         # 3
         temp_array = randomWalk.copy()
         X = indexes.copy()
-        # for i in range(0, segment_size):
-        #     X.append(i)
-
         i = 0
         k = indexes[0]
         F = []
@@ -78,10 +76,9 @@ def DFA():
         F_avg.append(np.average(F))
         print(segment_size, np.average(F))
 
-    #6 double logaritmic plot
+    # 6 double logaritmic plot
     plt.scatter(np.log(L), np.log(F_avg), s=20)
-    # plt.title('DFA Nile')
-    plt.title('DFA assigment 2')
+    plt.title('DFA nile')
     plt.ylabel('log(F(L))')
     plt.xlabel('log(L)')
 
@@ -89,8 +86,7 @@ def DFA():
     print('alfa = ', result[0])
     print(result)
 
-    # plt.text(5, 7.25, '\u03B1 = {}'.format(round(result[0], 2)))
-    plt.text(6, 3.5, '\u03B1 = {}'.format(round(result[0], 2)))
+    plt.text(5, 7.25, '\u03B1 = {}'.format(round(result[0], 2)))
     x1 = np.log(L[0])
     x2 = np.log(L[-1])
     plt.plot([np.log(L[0]), np.log(L[-1])], [result[0]*x1+result[1], result[0]*x2+result[1]], 'red')

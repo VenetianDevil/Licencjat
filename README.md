@@ -19,3 +19,9 @@
     * 5 punktów:
     
     ![NILE](wyniki/RS-nile-5.png)
+
+## DMA
+
+* nile
+
+    ![NILEDMA](wyniki/DMA_nile.png)

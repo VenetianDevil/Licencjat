@@ -3,45 +3,21 @@
 from Lib.random import *
 import numpy as np
 import matplotlib.pyplot as plt
-
-
-def prepareData():
-    array = []
-    indexes = []
-    with open('nile.txt') as data:
-        for line in data:
-            i, value = line.split()
-            indexes.append(int(i))
-            array.append(float(value))
-    # array = [1.5, 1, 2, 3.5, 4, 2, 3, 1]
-    # indexes = [1, 2, 3, 4, 5, 6, 7, 8]
-
-    L = []
-    w = len(array)
-    while w / 2 > 4:
-        if w % 2 == 0:
-            L.append(int(w / 2))
-            w = w / 2
-        else:
-            w -= 1
-
-    return indexes, array, L
-
+from prepareFiles import *
 
 def DFA():
     # 0
-    indexes, array, L = prepareData()
+    indexes, array, L = prepareData('nile.txt', None, 2)
     N = len(array)
 
-    # 1 OK
+    # 1 ¶rednia wszystkich danych
     avg = np.average(array)
 
-    # 2 OK
+    # 2 zmiana danych na random walk
     randomWalk = []
-    for j in range(0, N):
-        cumulative_sum = 0.0
-        for i in range(0, j):
-            cumulative_sum += array[i] - avg
+    cumulative_sum = 0.0
+    for i in range(0, N):
+        cumulative_sum += array[i] - avg
         randomWalk.append(cumulative_sum)
 
     # petla do wybierania d³ugo¶ci segmentów

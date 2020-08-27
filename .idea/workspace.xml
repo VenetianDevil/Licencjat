@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d85752bc-3839-440e-b210-a43845e5bcd9" name="Default Changelist" comment="" />
+    <list default="true" id="d85752bc-3839-440e-b210-a43845e5bcd9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Licencjat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Licencjat.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/DFA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DMA.py" beforeDir="false" afterPath="$PROJECT_DIR$/DMA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RS.py" beforeDir="false" afterPath="$PROJECT_DIR$/RS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wyniki/RS-nile-5.png" beforeDir="false" afterPath="$PROJECT_DIR$/wyniki/RS-nile-5.png" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,14 +27,17 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/RandomWalk-for-Nile.png" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/wyniki" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Python" />
   </component>
-  <component name="RunManager" selected="Python.DFA">
+  <component name="RunManager" selected="Python.DMA">
     <configuration name="DFA" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Licencjat" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -42,10 +53,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="DMA" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Licencjat" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DMA.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="RS" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Licencjat" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -85,6 +118,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.DMA" />
         <item itemvalue="Python.DFA" />
         <item itemvalue="Python.RS" />
       </list>
@@ -102,6 +136,11 @@
       <updated>1583333934196</updated>
       <workItem from="1583333939031" duration="21113000" />
       <workItem from="1583942862994" duration="8943000" />
+      <workItem from="1586087444200" duration="8418000" />
+      <workItem from="1589136841729" duration="440000" />
+      <workItem from="1590247882754" duration="19150000" />
+      <workItem from="1592732766585" duration="2505000" />
+      <workItem from="1595689821735" duration="3317000" />
     </task>
     <servers />
   </component>
@@ -109,62 +148,18 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="872" y="178" key="#Notifications" timestamp="1583337390644">
+    <state x="1025" y="145" key="FileChooserDialogImpl" timestamp="1591902375925">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="872" y="178" key="#Notifications/0.0.2560.1040@0.0.2560.1040" timestamp="1583337390644" />
-    <state x="94" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583359283444">
+    <state x="1025" y="145" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1591902375925" />
+    <state x="1235" y="59" key="SettingsEditor" timestamp="1590945818117">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="94" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1583359283444" />
-    <state x="1060" y="260" key="FileChooserDialogImpl" timestamp="1583950383240">
+    <state x="1235" y="59" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1590945818117" />
+    <state x="1263" y="324" key="com.intellij.ide.util.TipDialog" timestamp="1595689822432">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1060" y="260" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1583950383240" />
-    <state width="2517" height="348" key="GridCell.Tab.0.bottom" timestamp="1583942890291">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="348" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1583942890291" />
-    <state width="2517" height="348" key="GridCell.Tab.0.center" timestamp="1583942890291">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="348" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1583942890291" />
-    <state width="2517" height="348" key="GridCell.Tab.0.left" timestamp="1583942890291">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="348" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1583942890291" />
-    <state width="2517" height="348" key="GridCell.Tab.0.right" timestamp="1583942890291">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="348" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1583942890291" />
-    <state width="2517" height="348" key="GridCell.Tab.1.bottom" timestamp="1583942890291">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="348" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1583942890291" />
-    <state width="2517" height="348" key="GridCell.Tab.1.center" timestamp="1583942890291">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="348" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1583942890291" />
-    <state width="2517" height="348" key="GridCell.Tab.1.left" timestamp="1583942890291">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="348" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1583942890291" />
-    <state width="2517" height="348" key="GridCell.Tab.1.right" timestamp="1583942890291">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="348" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1583942890291" />
-    <state x="781" y="162" key="SettingsEditor" timestamp="1583337360186">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="781" y="162" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1583337360186" />
-    <state x="981" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1583942876111">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="981" y="344" key="com.intellij.ide.util.TipDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1583942876111" />
-    <state x="1021" y="163" key="refactoring.ChangeSignatureDialog" timestamp="1583352603476">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="1021" y="163" key="refactoring.ChangeSignatureDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1583352603476" />
+    <state x="1263" y="324" key="com.intellij.ide.util.TipDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1595689822432" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Licencjat$DFA.coverage" NAME="DFA Coverage Results" MODIFIED="1583349724834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

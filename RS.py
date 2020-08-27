@@ -3,66 +3,45 @@
 from Lib.random import *
 import numpy as np
 import matplotlib.pyplot as plt
-
-
-def prepareData():
-    array = []
-    with open('nile.txt') as data:
-        for line in data:
-            i, value = line.split()
-            array.append(float(value))
-    # array = [1.5, 1, 2, 3.5, 4, 2, 3, 1]
-
-    L = []
-    w = len(array)
-    while w / 2 > 4:
-        if w % 2 == 0:
-            L.append(int(w / 2))
-            w = w / 2
-        else:
-            w -= 1
-
-    return array, L
+from prepareFiles import *
 
 
 def RS():
     #0
-    array, L = prepareData()
-    N = len(array)
-    AVG = []
-    for size in L:
-        print('\n\nsize = ', size)
-        Total = []
+    indexes, X, L = prepareData('nile.txt', 165, 4)         # pobranie danych
+    N = len(X)                                              # N = ilo¶æ badanych danych
+    AVG = []                                                # tablica, w której zbieramy koñcowe wyniki dla ka¿dego n
+    for n in L:                                     # (1)
+        R_S = []                                    # warto¶ci R/S dla n, warto¶æ R_S[1] odpowiada d³ugo¶ci n z L[1]
+        Z = []                                      # tablica sum odchyleñ dla wszystkich serii o d³ugo¶ci n
+        total_S = []                                # zbiór warto¶ci S dla przedzia³u o d³ugo¶ci n, S[1] -> L[1]
         i = 0
-        Z = []
-        tot_S = []
-        while i <= N - size:
-            seg = array[i:i+size]
-            # wyliczenie srendniej -> funkcja average chyba tez bd ok
-            m = (np.average(seg))
-            Y = []
-            # Create a series of deviations for each range
-            for s in range(i, i+size):
-                Y.append(array[s] - m)
-            # the running total of the deviations from the mean for each series
+        while i <= N - n:                           # (2)
+            segment = X[i:i+n]                      # wybranie kolejnego segmentu o d³ugo¶ci n
+            m = (np.average(segment))               # wyliczenie ¶rendniej dla wybranego segmentu o d³ugo¶ci n
+            Y = []                                  # Seria odchyleñ dla danego segmentu
+            for s in range(i, i+n):                 # (3)
+                Y.append(X[s] - m)
 
-            Z.append(np.sum(Y))
+            Z.append(np.sum(Y))                     # zapisanie pe³nego odchylenia ¶redniej dla przedzia³u
 
-            S = cumulativeSum(size, seg, m)  # the standard deviation for each range
-            S = np.sqrt(S/size)
-            tot_S.append(S)
+            S = cumulativeSum(n, segment, m)        # (4)
+            S = np.sqrt(S/n)                        # Odchylenie standardowe dla wyznaczonego przedzia³u
+            total_S.append(S)                       # (5)
 
-            i += size
+            i += n                                  # wybranie pocz±tku nastêpnego przedzia³u o d³ugo¶ci n
 
-        R = max(Z) - min(Z)  # the widest difference in the series of deviations
-        for s in tot_S:
+        R = max(Z) - min(Z)                         # (6) Najwiêksza ró¿nica odchyleñ dla wszystkich zbadanych podzia³ów
+        for s in total_S:                           # (7)
             if s != 0:
-                Total.append(R/s)
-        # Average the rescaled range values for each region to summarize each range
-        AVG.append((np.average(Total)))
+                R_S.append(R/s)                     # (8) wyznaczenie R/S dla ka¿dego przedzia³u o d³ugo¶ci n
+
+        AVG.append(np.average(R_S))                 # (9) zapisanie ¶reniej ze wszystkich zebranych warto¶ci R_S[n]
 
     plt.scatter(np.log(L), np.log(AVG), s=10)
     plt.title('RS Nile')
+    plt.ylabel('log((R/S)/n)')
+    plt.xlabel('log(n)')
     result = np.polyfit(np.log(L), np.log(AVG), 1)
 
     plt.text(3.5, -29.7, '\u03B1 = {}'.format(round(result[0], 2)))
@@ -75,7 +54,7 @@ def RS():
 def cumulativeSum(size, array, m):
     cumulative_sum = 0
     for w in range(0, size):
-        cumulative_sum += (array[w] - m) * (array[w] - m)
+        cumulative_sum += (array[w] - m) * (array[w] - m)       # (10)
     return cumulative_sum
 
 

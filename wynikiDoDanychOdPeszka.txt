@@ -1,0 +1,7 @@
+
+		R/S	DFA	DMA
+Births:		0.73	0.59	0.08
+temp:		0.77	0.97	0.01
+zurich:dupa	0.1	1.12	0.26-0.45
+
+Ogólnie zurich dziwne wyniki, a DMA jest Zbugowany.

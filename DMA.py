@@ -3,7 +3,7 @@
 from random import *
 import numpy as np
 import matplotlib.pyplot as plt
-
+from prepareFiles import *
 
 def prepareData():
     array = []
@@ -13,18 +13,19 @@ def prepareData():
             i, value = line.split()
             indexes.append(int(i))
             array.append(float(value))
-    # array = [1.5, 1, 2, 3.5, 4, 2, 3, 1]
-    # indexes = [1, 2, 3, 4, 5, 6, 7, 8]
+    # array = [1.5, 1, 2, 3.5, 4, 2, 3, 1, 5.5, 7, 6, 8, 7, 9, 6.5, 5.5]
+    # indexes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
     L = []
     w = len(array)
-    while w / 2 > 2:
+    while w / 2 >= 2:
         if w % 2 == 0:
             L.append(int(w / 2))
             w = w / 2
         else:
             w -= 1
 
+    print(L)
     return indexes, array, L
 
 def DMA():
@@ -36,7 +37,7 @@ def DMA():
     for n in L:
         # 1 srednia ruchoma dla przedzia³ów dlugosci n
         i = n-1
-        print('n = ', n)
+        # print('n = ', n)
         movingAverage = []
         while i < N:
             cumulative_sum = 0.0
@@ -45,15 +46,12 @@ def DMA():
             movingAverage.append(cumulative_sum/n)
             i += 1
 
-        # print (movingAverage)
         #2
         sum = 0.0
         for i in range(0, len(movingAverage)):
             sum += (array[i+n-1] - movingAverage[i]) * (array[i+n-1] - movingAverage[i])
         modifiedStandardDeviation.append(np.sqrt(sum / (N - n)))
 
-    # print('L', L)
-    # print('modifiedStandardDeviation', modifiedStandardDeviation)
 
     # 3 double logaritmic plot
     plt.scatter(np.log(L), np.log(modifiedStandardDeviation), s=20)

@@ -5,38 +5,35 @@ import numpy as np
 import matplotlib.pyplot as plt
 from prepareFiles import *
 
-
 def RS():
     #0
-    indexes, X, L = prepareData('nile.txt', 165, 4)         # pobranie danych
-    N = len(X)                                              # N = ilo∂Ê badanych danych
-    AVG = []                                                # tablica, w ktÛrej zbieramy koÒcowe wyniki dla kaødego n
-    for n in L:                                     # (1)
-        R_S = []                                    # warto∂ci R/S dla n, warto∂Ê R_S[1] odpowiada d≥ugo∂ci n z L[1]
-        Z = []                                      # tablica sum odchyleÒ dla wszystkich serii o d≥ugo∂ci n
-        total_S = []                                # zbiÛr warto∂ci S dla przedzia≥u o d≥ugo∂ci n, S[1] -> L[1]
+    indexes, X, L = prepareData('nile.txt', 331, 2)         # pobranie danych
+    N = len(X)                                               # N = ilo≈õƒá badanych danych
+    AVG = []                                                 # tablica, w kt√≥rej zbieramy ko≈Ñcowe wyniki dla ka≈ºdego n
+    for n in L:                                              # (1)
+        R_S = []                                             # warto≈õci R/S dla serii o d≈Çugo≈õci n
+        R = []                                               # zbi√≥r najwiƒôkszych r√≥≈ºnic odchyle≈Ñ w przedzia≈Çach d≈Çugo≈õci n
+        S = []                                               # zbi√≥r warto≈õci odchyle≈Ñ standardowych dla przedzia≈Ç√≥w o d≈Çugo≈õci n
         i = 0
-        while i <= N - n:                           # (2)
-            segment = X[i:i+n]                      # wybranie kolejnego segmentu o d≥ugo∂ci n
-            m = (np.average(segment))               # wyliczenie ∂rendniej dla wybranego segmentu o d≥ugo∂ci n
-            Y = []                                  # Seria odchyleÒ dla danego segmentu
-            for s in range(i, i+n):                 # (3)
+        while i <= N - n:                                    # (2)
+            segment = X[i:i+n]                               # wybranie kolejnego segmentu o d≈Çugo≈õci n
+            m = (np.average(segment))                        # wyliczenie ≈õredniej dla wybranego segmentu o d≈Çugo≈õci n
+            Y = []                                           # Seria odchyle≈Ñ dla danego segmentu
+            Z = []                                           # tablica sum odchyle≈Ñ dla wszystkich serii o d≈Çugo≈õci n
+            for s in range(i, i+n):                          # (3)
                 Y.append(X[s] - m)
+                Z.append(np.sum(Y))                          # zapisanie pe≈Çnego odchylenia ≈õredniej dla przedzia≈Çu
+            
+            S.append(satndardDeviation(n, Y))                # (4) Odchylenie standardowe dla wyznaczonego przedzia≈Çu
+            R.append(max(Z) - min(Z))                        # (6) Najwiƒôksza r√≥nica odchyle≈Ñ dla zbadanego podzia≈Çu
 
-            Z.append(np.sum(Y))                     # zapisanie pe≥nego odchylenia ∂redniej dla przedzia≥u
+            i += n                                           # wybranie poczƒÖtku nastƒôpnego przedzia≈Çu o d≈Çugo≈õci n
 
-            S = cumulativeSum(n, segment, m)        # (4)
-            S = np.sqrt(S/n)                        # Odchylenie standardowe dla wyznaczonego przedzia≥u
-            total_S.append(S)                       # (5)
-
-            i += n                                  # wybranie pocz±tku nastÍpnego przedzia≥u o d≥ugo∂ci n
-
-        R = max(Z) - min(Z)                         # (6) NajwiÍksza rÛønica odchyleÒ dla wszystkich zbadanych podzia≥Ûw
-        for s in total_S:                           # (7)
+        for r, s in zip(R, S):                               # (7)
             if s != 0:
-                R_S.append(R/s)                     # (8) wyznaczenie R/S dla kaødego przedzia≥u o d≥ugo∂ci n
-
-        AVG.append(np.average(R_S))                 # (9) zapisanie ∂reniej ze wszystkich zebranych warto∂ci R_S[n]
+                R_S.append(r/s)                              # (8) wyznaczenie R/S dla ka≈ºdego przedzia≈Çu o d≈Çugo≈õci n
+        
+        AVG.append(np.average(R_S))                          # (9) zapisanie ≈õredniej ze wszystkich zebranych warto≈õci R_S[n]
 
     plt.scatter(np.log(L), np.log(AVG), s=10)
     plt.title('RS Nile')
@@ -44,18 +41,18 @@ def RS():
     plt.xlabel('log(n)')
     result = np.polyfit(np.log(L), np.log(AVG), 1)
 
-    plt.text(3.5, -29.7, '\u03B1 = {}'.format(round(result[0], 2)))
+    plt.text(4.5, 4, '\u03B1 = {}'.format(round(result[0], 2)))
     x1 = np.log(L[0])
     x2 = np.log(L[-1])
     plt.plot([np.log(L[0]), np.log(L[-1])], [result[0] * x1 + result[1], result[0] * x2 + result[1]], 'red')
     plt.show()
 
 
-def cumulativeSum(size, array, m):
+def satndardDeviation(size, array):
     cumulative_sum = 0
-    for w in range(0, size):
-        cumulative_sum += (array[w] - m) * (array[w] - m)       # (10)
-    return cumulative_sum
+    for i in range(0, size):
+        cumulative_sum += array[i] * array[i]                 # (10)
+    return np.sqrt(cumulative_sum / size)
 
 
 RS()

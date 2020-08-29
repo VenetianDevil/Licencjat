@@ -24,4 +24,7 @@ def prepareData(file, start_length, end_length):
         else:
             w -= 1
 
+    # for i in range(2, start_length):
+    #     L.append(i)
+
     return indexes, array, L

@@ -17,14 +17,14 @@ def prepareData(file, start_length, end_length):
     else:
         w = len(array)
 
-    while w / 2 > end_length:
-        if w % 2 == 0:
-            L.append(int(w / 2))
-            w = w / 2
-        else:
-            w -= 1
+    # while w / 2 > end_length:
+    #     if w % 2 == 0:
+    #         L.append(int(w / 2))
+    #         w = w / 2
+    #     else:
+    #         w -= 1
 
-    # for i in range(2, start_length):
-    #     L.append(i)
+    for i in range(end_length, w):
+        L.append(i)
 
     return indexes, array, L

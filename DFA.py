@@ -7,52 +7,50 @@ from prepareFiles import *
 
 def DFA():
     # 0
-    indexes, array, L = prepareData('nile.txt', None, 2)
-    N = len(array)
+    indexes, D, L = prepareData('nile.txt', 331, 4)
+    N = len(D)
 
-    # 1 ∂rednia wszystkich danych
-    avg = np.average(array)
+    # 1 ≈õrednia wszystkich danych
+    avg = np.average(D)
 
     # 2 zmiana danych na random walk
     randomWalk = []
     cumulative_sum = 0.0
     for i in range(0, N):
-        cumulative_sum += array[i] - avg
+        cumulative_sum += D[i] - avg
         randomWalk.append(cumulative_sum)
 
-    # petla do wybierania d≥ugo∂ci segmentÛw
+    # petla do wybierania d≈Çugo≈õci segment√≥w
     F_avg = []
     for segment_size in L:
-        # print(segment_size)
         # plt.plot(indexes, randomWalk)
         # plt.title('Nile random walk')
 
         # 3
-        temp_array = randomWalk.copy()
+        Y = randomWalk.copy()
         X = indexes.copy()
         i = 0
         k = indexes[0]
         F = []
         while i <= N - segment_size:
-            # znalezienie prostej w segmencie: line[0]=a; line[1]=b;
-            line = np.polyfit(X[0:segment_size], temp_array[0:segment_size], 1)
+            # 4 znalezienie prostej w segmencie: line[0]=a; line[1]=b;
+            line = np.polyfit(X[0:segment_size], Y[0:segment_size], 1)
 
-            del temp_array[0:segment_size]
+            del Y[0:segment_size]
             # plt.plot([X[0], X[segment_size-1]],
             #          [line[0] * X[0] + line[1], line[0] * X[segment_size - 1] + line[1]], 'r')
             del X[0:segment_size]
 
-            # 4 wyliczenie F
+            # 5 wyliczenie F
             F.append(calculateF(line, segment_size, i, k, randomWalk))
             k = k + segment_size
             i = i + segment_size
         # plt.show()
 
-        # 5 obliczenie sredniej fluktuacji dla danej dlugosci segmentu
+        # 6 obliczenie sredniej fluktuacji dla danej dlugosci segmentu
         F_avg.append(np.average(F))
-        print(segment_size, np.average(F))
 
-    # 6 double logaritmic plot
+    # 7 double logaritmic plot
     plt.scatter(np.log(L), np.log(F_avg), s=20)
     plt.title('DFA nile')
     plt.ylabel('log(F(L))')
@@ -68,14 +66,14 @@ def DFA():
     plt.plot([np.log(L[0]), np.log(L[-1])], [result[0]*x1+result[1], result[0]*x2+result[1]], 'red')
     plt.show()
 
-
-def calculateF(line, size, i, k, array):
+# 8
+def calculateF(line, n, i, k, RW):
     segment_sum = 0
-    for n in range(i, i + size):
-        segment_sum += (array[n] - (line[0] * k) - line[1]) * (array[n] - (line[0] * k) - line[1])
+    for j in range(i, i + n):
+        segment_sum += (RW[j] - (line[0] * k) - line[1]) * (RW[j] - (line[0] * k) - line[1])
         k = k + 1
 
-    F = np.sqrt((1 / size) * segment_sum)
+    F = np.sqrt((1 / n) * segment_sum)
     return F
 
 

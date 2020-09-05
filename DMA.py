@@ -3,11 +3,11 @@
 from random import *
 import numpy as np
 import matplotlib.pyplot as plt
-from prepareFiles import *
+from prepareData import *
 
 def DMA():
     # 0
-    indexes, X, L = prepareData('nile.txt', 400, 300)
+    indexes, X, L = prepareData('files/bumps.txt', 600, 550)
     N = len(X)
 
     modifiedStandardDeviation = []
@@ -31,7 +31,7 @@ def DMA():
 
     # 3 double logaritmic plot
     plt.scatter(np.log(L), np.log(modifiedStandardDeviation), s=20)
-    plt.title('DMA nile')
+    plt.title('DMA bumps')
     plt.ylabel(r'log($\sigma_{DMA}(n)$)')
     plt.xlabel('log(n)')
 

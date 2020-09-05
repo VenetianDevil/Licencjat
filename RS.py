@@ -3,11 +3,11 @@
 from Lib.random import *
 import numpy as np
 import matplotlib.pyplot as plt
-from prepareFiles import *
+from prepareData import *
 
 def RS():
     #0
-    indexes, X, L = prepareData('nile.txt', 331, 2)         # pobranie danych
+    indexes, X, L = prepareData('files/nile.txt', None, 2)   # pobranie danych
     N = len(X)                                               # N = ilość badanych danych
     AVG = []                                                 # tablica, w której zbieramy końcowe wyniki dla każdego n
     for n in L:                                              # (1)
@@ -17,16 +17,16 @@ def RS():
         i = 0
         while i <= N - n:                                    # (2)
             segment = X[i:i+n]                               # wybranie kolejnego segmentu o długości n
-            m = (np.average(segment))                        # wyliczenie średniej dla wybranego segmentu o długości n
+            m = np.average(segment)                        	 # wyliczenie średniej dla wybranego segmentu o długości n
             Y = []                                           # Seria odchyleń dla danego segmentu
             Z = []                                           # tablica sum odchyleń dla wszystkich serii o długości n
             for s in range(i, i+n):                          # (3)
                 Y.append(X[s] - m)
                 Z.append(np.sum(Y))                          # zapisanie pełnego odchylenia średniej dla przedziału
             
-            S.append(satndardDeviation(n, Y))                # (4) Odchylenie standardowe dla wyznaczonego przedziału
             R.append(max(Z) - min(Z))                        # (6) Największa rónica odchyleń dla zbadanego podziału
-
+            S.append(satndardDeviation(n, Y))                # (4) Odchylenie standardowe dla wyznaczonego przedziału
+                                                             # (5)
             i += n                                           # wybranie początku następnego przedziału o długości n
 
         for r, s in zip(R, S):                               # (7)
@@ -40,6 +40,7 @@ def RS():
     plt.ylabel('log((R/S)/n)')
     plt.xlabel('log(n)')
     result = np.polyfit(np.log(L), np.log(AVG), 1)
+    print('alfa = ', result[0])
 
     plt.text(4.5, 4, '\u03B1 = {}'.format(round(result[0], 2)))
     x1 = np.log(L[0])
@@ -48,11 +49,11 @@ def RS():
     plt.show()
 
 
-def satndardDeviation(size, array):
+def satndardDeviation(n, Y):
     cumulative_sum = 0
-    for i in range(0, size):
-        cumulative_sum += array[i] * array[i]                 # (10)
-    return np.sqrt(cumulative_sum / size)
+    for i in range(0, n):
+        cumulative_sum += Y[i] * Y[i]                 # (10)
+    return np.sqrt(cumulative_sum / n)
 
 
 RS()

@@ -3,11 +3,11 @@
 from Lib.random import *
 import numpy as np
 import matplotlib.pyplot as plt
-from prepareFiles import *
+from prepareData import *
 
 def DFA():
     # 0
-    indexes, D, L = prepareData('nile.txt', 331, 4)
+    indexes, D, L = prepareData('./files/assigment4.txt', None, 5)
     N = len(D)
 
     # 1 średnia wszystkich danych
@@ -52,7 +52,7 @@ def DFA():
 
     # 7 double logaritmic plot
     plt.scatter(np.log(L), np.log(F_avg), s=20)
-    plt.title('DFA nile')
+    plt.title('DFA assigment4')
     plt.ylabel('log(F(L))')
     plt.xlabel('log(L)')
 
@@ -60,7 +60,7 @@ def DFA():
     print('alfa = ', result[0])
     print(result)
 
-    plt.text(5, 7.25, '\u03B1 = {}'.format(round(result[0], 2)))
+    plt.text(5, 3.25, '\u03B1 = {}'.format(round(result[0], 2)))
     x1 = np.log(L[0])
     x2 = np.log(L[-1])
     plt.plot([np.log(L[0]), np.log(L[-1])], [result[0]*x1+result[1], result[0]*x2+result[1]], 'red')

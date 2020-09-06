@@ -7,7 +7,7 @@ from prepareData import *
 
 def DMA():
     # 0
-    indexes, X, L = prepareData('files/bumps.txt', 600, 550)
+    indexes, X, L = prepareData('files/zurich.txt', 50, 4)
     N = len(X)
 
     modifiedStandardDeviation = []
@@ -31,7 +31,7 @@ def DMA():
 
     # 3 double logaritmic plot
     plt.scatter(np.log(L), np.log(modifiedStandardDeviation), s=20)
-    plt.title('DMA bumps')
+    plt.title('DMA zurich')
     plt.ylabel(r'log($\sigma_{DMA}(n)$)')
     plt.xlabel('log(n)')
 
@@ -39,7 +39,7 @@ def DMA():
     print('alfa = ', result[0])
     print(result)
 
-    plt.text(5.9, 4.51, '\u03B1 = {}'.format(round(result[0], 2)))
+    plt.text(3.3, 3.6, '\u03B1 = {}'.format(round(result[0], 2)))
     x1 = np.log(L[0])
     x2 = np.log(L[-1])
     plt.plot([np.log(L[0]), np.log(L[-1])], [result[0] * x1 + result[1], result[0] * x2 + result[1]], 'red')

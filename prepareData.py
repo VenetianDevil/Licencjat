@@ -23,6 +23,10 @@ def prepareData(file, max_n, min_n):
             w = w / 2
         else:
             w -= 1
+    
+    # while w > min_n:
+    #     L.append(int(w))
+    #     w = w-1
 
     return indexes, X, L
 

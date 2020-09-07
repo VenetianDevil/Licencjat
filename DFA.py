@@ -7,7 +7,7 @@ from prepareData import *
 
 def DFA():
     # 0
-    indexes, D, L = prepareData('./files/zurich.txt', 250, 2)
+    indexes, D, L = prepareData('./files/warner.txt', None, 2)
     N = len(D)
 
     # 1 średnia wszystkich danych
@@ -24,7 +24,7 @@ def DFA():
     F_avg = []
     for segment_size in L:
         # plt.plot(indexes, randomWalk)
-        # plt.title('zurich')
+        # plt.title('warner')
 
         # 3
         Y = randomWalk.copy()
@@ -52,7 +52,7 @@ def DFA():
 
     # 7 double logaritmic plot
     plt.scatter(np.log(L), np.log(F_avg), s=20)
-    plt.title('DFA zurich')
+    plt.title('DFA warner')
     plt.ylabel(r'$log(\tilde{F}(n))$')
     plt.xlabel('log(n)')
 

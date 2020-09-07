@@ -7,7 +7,7 @@ from prepareData import *
 
 def RS():
     #0
-    indexes, X, L = prepareData('files/zurich.txt', None, 2)   # pobranie danych
+    indexes, X, L = prepareData('files/warner.txt', None, 2)   # pobranie danych
     N = len(X)                                               # N = ilość badanych danych
     AVG = []                                                 # tablica, w której zbieramy końcowe wyniki dla każdego n
     for n in L:                                              # (1)
@@ -36,7 +36,7 @@ def RS():
         AVG.append(np.average(R_S))                          # (9) zapisanie średniej ze wszystkich zebranych wartości R_S[n]
 
     plt.scatter(np.log(L), np.log(AVG), s=10)
-    plt.title('RS zurich')
+    plt.title('RS warner')
     plt.ylabel('log((R/S)/n)')
     plt.xlabel('log(n)')
     result = np.polyfit(np.log(L), np.log(AVG), 1)
